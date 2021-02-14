@@ -49,7 +49,6 @@ export class PostDialogComponent extends FormComponent implements OnInit {
     let post: Post = new Post();
     post.Content = this.formCheckout.controls.post.value;
     post.ImgUrl = this.formCheckout.controls.imgUrl.value;
-    // console.log('post', post);
 
     this.postService.postWithHeader<Post>(
       post, 
@@ -57,6 +56,7 @@ export class PostDialogComponent extends FormComponent implements OnInit {
       .subscribe(p => {
         // clear data..
         this.clearData();
+        p.UserDisplayName = this.authService.getUserData().displayName;
         if (this.postHasBeenUploaded.observers.length > 0) {
           console.log(p);
           this.postHasBeenUploaded.emit(p);

@@ -20,6 +20,12 @@
     }
 }
 
+.post-name {
+    color: $grey;
+    font-size: 0.8em;
+    font-weight: 500;
+}
+
 .add-like {
     background-image: url(../../../../assets/images/add-like.svg);
     background-size: contain;

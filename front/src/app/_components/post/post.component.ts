@@ -90,6 +90,9 @@ export class PostComponent implements OnInit {
       ).subscribe(posts => {
         this.posts = posts.sort((a, b) => new Date(a.UpdatedAt).getTime() - new Date(b.UpdatedAt).getTime());;
         this.posts.reverse();
+
+        this.posts.map(p => p.Content = this.addUserNameToPostContent(p.Content, p.UserDisplayName));
+
         console.log('posts', posts);
         this.cd.markForCheck();
       },
@@ -98,6 +101,27 @@ export class PostComponent implements OnInit {
       }
     );
   }
+
+  /**
+   * Add @Name to post contant 
+   * @param content 
+   * @param toAdd 
+   */
+  private addUserNameToPostContent(content: string, toAdd?: string): string {
+    let split: string[] = content.split('<p>');
+    let newContent: string = '';
+
+    if(split.length > 1)
+    {
+      split[1] = toAdd ? `<b class="post-name">@${toAdd}</b>: ${split[1]}` : `<b>@unknown</b>: ${split[1]}`;
+      split.forEach((s, i) => newContent += (i == 0) ? `${s}` : `<p>${s}`);
+    } else {
+      newContent = toAdd ? `<b class="post-name">@${toAdd}</b>: ${content}` : `<b>@unknown</b>: ${content}`;
+    }
+    return newContent;
+  }
+
+
 
   /**
    * Subscribe to deleted posts
@@ -117,6 +141,7 @@ export class PostComponent implements OnInit {
   private subscribeToPosts(): void {
     this.ioService.getPost()
     .subscribe((post: Post) => {
+      post.Content = this.addUserNameToPostContent(post.Content, post.UserDisplayName)
       post.likes = 0;
       this.posts.unshift(post);
       this.cd.markForCheck();

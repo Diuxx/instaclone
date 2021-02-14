@@ -3,8 +3,6 @@ import { AppInit } from 'src/app/_core/init/appInit';
 
 // primeng ripple
 import { PrimeNGConfig } from 'primeng/api';
-
-
 import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
