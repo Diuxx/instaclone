@@ -87,6 +87,10 @@ export class AuthService {
             window.location.reload();
           });
         }, err => {
+          this.SetUserData(result.user);
+          this.ngZone.run(() => {
+            window.location.reload();
+          });
           console.log(err);
         });
       }).catch((error) => {

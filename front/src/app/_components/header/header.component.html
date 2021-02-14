@@ -3,7 +3,7 @@
   <!-- header content -->
   <div class="p-grid p-col right">
     <!-- right header content -->
-    <p>Welcome <b>{{ getUserData().displayName }}</b></p>
+    <p *ngIf="isAuth">Welcome <b>{{ getUserData()?.displayName ? getUserData()?.displayName : 'unknown' }}</b></p>
   </div>
   <div class="p-grid p-col left">
     <!-- left header content -->

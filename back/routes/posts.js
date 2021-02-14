@@ -29,7 +29,6 @@ router.get('/', function(req, res, next) {
                 console.log(err.message);
                 throw err;
             } else {
-                console.log(rows);
                 res.status(200).json(rows);
             }
         });
