@@ -1,0 +1,106 @@
+@import '../../../../assets/color-config.scss';
+
+:host {
+    display: flex;
+    justify-content: center;
+}
+
+.post-navigation {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.p-button.p-button-danger.delete-button {
+    width: 18px;
+    height: 8px;
+    display: none;
+    .pi {
+        font-size: 0.4em;
+    }
+}
+
+.add-like {
+    background-image: url(../../../../assets/images/add-like.svg);
+    background-size: contain;
+    width: 20px;
+    height: 20px;
+    filter: invert(92%) sepia(7%) saturate(188%) hue-rotate(161deg) brightness(86%) contrast(85%);
+    transition: width 200ms, height 200ms;
+    cursor: pointer;
+    &:hover {
+        filter: invert(43%) sepia(98%) saturate(3437%) hue-rotate(340deg) brightness(96%) contrast(89%);
+        width: 24px;
+        height: 24px;
+    }
+}
+
+.remove-like {
+    // background: url("");
+    background-image: url(../../../../assets/images/remove-like.svg);
+    background-size: contain;
+    width: 20px;
+    height: 20px;
+    filter: invert(43%) sepia(98%) saturate(3437%) hue-rotate(340deg) brightness(96%) contrast(89%);
+    transition: width 200ms, height 200ms;
+    cursor: pointer;
+    &:hover {
+        filter: invert(92%) sepia(7%) saturate(188%) hue-rotate(161deg) brightness(86%) contrast(85%);
+        width: 16px;
+        height: 16px;
+    }
+}
+
+.post {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    justify-content: center;
+    position: relative;
+    gap: 5px;
+    box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
+    border-radius: 3px;
+    padding: 5px;
+    &:hover .p-button.p-button-danger.delete-button {
+        display: inline-flex;
+    }
+}
+
+.post .header {
+    width: 180px;
+    img {
+        width: inherit;
+    }
+}
+
+.post .content {
+    width: 180px;
+    max-height: 30px;
+}
+
+.post .content p {
+    margin: 0;
+    font-size: 10px;
+}
+
+.post .footer {
+    width: 180px;
+    max-height: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+    .i {
+        font-size: 2rem;
+        color: red;
+        cursor: text;
+    }
+}
+
+.likes {
+    font-size: 8px;
+    b {
+        color: $purple;
+    }
+}

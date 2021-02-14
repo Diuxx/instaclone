@@ -1,0 +1,37 @@
+<app-form [formGroup]="formCheckout">
+  <!-- Email field -->
+  <div class="p-field">
+    <label for="login">Email</label>
+    <input id="login" type="username" formControlName="login" aria-describedby="login-help" pInputText />
+    <small *ngIf="getLogin()?.errors?.required && getLogin().touched" id="loginErr" class="p-error">Email address is required.</small>
+    <small *ngIf="getLogin()?.errors?.email && getLogin().touched" id="loginErr" class="p-error">Wrong email address format.</small>
+  </div>
+  
+  <!-- Password field -->
+  <div class="p-field">
+    <label for="password">Password</label>
+    <input id="password" type="password" formControlName="password" [feedback]="false" pPassword />
+    <small *ngIf="getPassword()?.errors?.required && getPassword().touched" id="loginErr" class="p-error">Password is required.</small>
+  </div>
+  <div class="p-field">
+    <small *ngIf="getAuthService().hasLoginErr" id="loginErr" class="p-error">{{ getAuthService().loginErr }}</small>
+  </div>
+
+  <!-- Submit -->
+  <div class="p-field">
+    <button pButton pRipple type="button" [disabled]="!canSubmit()" label="Sign-in" class="p-button-raised t-b-blue" (click)="submit()"></button>
+  </div>
+  
+  <div class="login-alternatives">
+    <small>Or login with</small>
+    <div class="p-field">
+      <button pButton pRipple type="button" icon="pi pi-facebook" label="FaceBook" class="p-button-outlined p-button-sm p-button-secondary"></button>
+      <button pButton pRipple type="button" icon="pi pi-google" label="Google" class="p-button-outlined p-button-sm p-button-secondary"></button>
+    </div>
+  </div>
+
+  <div class="sign-up">
+    <small>Not a member? <a class="sign-up-button" role="button" (click)="displaySignUp()">Sign-up now</a></small>
+  </div>
+</app-form>
+

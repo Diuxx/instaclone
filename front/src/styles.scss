@@ -1,0 +1,36 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import './assets/color-config.scss';
+@import './assets/font-config.scss';
+
+body {
+    font-family: Roboto, 'Open Sans', Arial, sans-serif;
+    font-size: 12px !important;
+    margin: 0px;
+}
+
+// override primeng css
+.p-grid {
+    margin: 0 !important;
+}
+
+// app css
+.flex {
+    display: flex;
+}
+
+// override primeng p-field
+.p-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.sign-content {
+    display: block;
+    width: 325px;
+    max-width: 325px;
+}
+
+:host ::ng-deep p-button.t-b-blue {
+    background-color: $blue;
+}

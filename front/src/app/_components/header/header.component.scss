@@ -1,0 +1,79 @@
+@import '../../../assets/color-config.scss';
+
+.header {
+    padding: 3px;
+    /*border-bottom: 1px solid $light_grey;*/
+}
+
+.header .right {
+    justify-content: flex-start;
+    b {
+        color: purple;
+    }
+}
+
+.header .left {
+    justify-content: flex-end;
+}
+
+.menu-sep {
+    width: 2px;
+    height: 100%;
+}
+
+/**
+ * user icon css
+ */
+.user-icon,
+.menu-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    width: fit-content;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.user-icon:hover,
+.menu-icon:hover {
+    background-color: $light_grey;
+}
+
+.user-icon a,
+.menu-icon a
+{
+    padding: 4px;
+}
+
+.user-icon a img,
+.user-icon a i,
+.menu-icon a i {
+    background-size: 32px 32px;
+    border: 0;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    position: relative;
+    height: 32px;
+    width: 32px;
+    z-index: 0;
+}
+
+.user-icon a i {
+    background-color: $grey;
+}
+
+
+// dialog
+
+:host ::ng-deep .p-dialog-top-right .p-dialog {
+    margin-top: 4rem;
+}
+
+:host ::ng-deep .p-dialog .p-dialog-content {
+    padding-bottom: 1rem;
+}

@@ -1,0 +1,28 @@
+
+<div class="post-container">
+  <div class="controles">
+    <button pButton pRipple 
+      type="button"
+      icon="pi pi-plus"
+      (click)="postDialog = true"
+      class="p-button-rounded p-button-outlined"
+      pTooltip="Add new post">
+    </button>
+  </div>
+  <ng-template ngFor let-post [ngForOf]="posts">
+    <app-post-card 
+      [post]="post"
+      (liked)="broadcastLike($event)"
+      (unliked)="broadcastUnLike($event)"
+      (deleted)="broadcastDeleted($event)">
+    </app-post-card>
+  </ng-template>
+</div>
+
+<p-dialog 
+  [maximizable]="true"
+  header="New Post"
+  [(visible)]="postDialog"
+  [draggable]="false">
+  <app-postDialog (postHasBeenUploaded)="refeshPostList($event)"></app-postDialog>
+</p-dialog>

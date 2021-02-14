@@ -1,0 +1,57 @@
+
+<div class="p-grid header">
+  <!-- header content -->
+  <div class="p-grid p-col right">
+    <!-- right header content -->
+    <p>Welcome <b>{{ getUserData().displayName }}</b></p>
+  </div>
+  <div class="p-grid p-col left">
+    <!-- left header content -->
+    <div class="menu-icon">
+      <a role="button">
+        <i class="pi pi-ellipsis-h" style="font-size: 1.5em"></i>
+      </a>
+    </div>
+    <div class="menu-sep"></div>
+    <div class="user-icon">
+      <a *ngIf="!isAuth" 
+          role="button"
+          aria-expanded="false"
+          aria-label="signIn"
+          (click)="showSignInDialog()">
+        <!-- <img class="" src="../../../assets/images/unnamed.jpg"> -->
+        <i class="pi pi-user" style="font-size: 1.5em"></i>
+      </a>
+      <a *ngIf="isAuth"
+          role="button"
+          aria-expanded="false"
+          aria-label="userMenu"
+          (click)="op.toggle($event)">
+        <img class="" src="../../../assets/images/unnamed.jpg">
+      </a>
+    </div>
+  </div>
+</div>
+
+<p-overlayPanel #op>
+  <ng-template pTemplate>
+    <button pButton pRipple type="button" label="Logout" (click)="authService.SignOut()"></button>
+  </ng-template>
+</p-overlayPanel>
+
+<p-dialog 
+  [maximizable]="true"
+  position="top-right"
+  header="Login"
+  [(visible)]="signInDisplay"
+  [draggable]="false">
+  <app-sign-in (displaySignUpEvent)="showSignUpDialog()" ></app-sign-in>
+</p-dialog>
+
+<p-dialog 
+  position="top-right"
+  header="Sign-up"
+  [(visible)]="signUpDisplay"
+  [draggable]="false">
+  <app-sign-up (displaySignInEvent)="showSignInDialog()"></app-sign-up>
+</p-dialog>

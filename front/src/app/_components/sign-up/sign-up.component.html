@@ -1,0 +1,43 @@
+<app-form [formGroup]="formCheckout">
+  <div class="p-field">
+    <label for="displayName">Pseudo</label>
+    <input id="displayName" type="username" formControlName="displayName" aria-describedby="displayName-help" pInputText />
+  </div>
+  <div class="p-field">
+    <label for="email">Email</label>
+    <input id="email" type="email" formControlName="email" aria-describedby="email-help" pInputText />
+  </div>
+  <div class="p-field">
+    <label for="password">Password</label>
+    <input id="password" type="password" formControlName="password" [feedback]="true" pPassword />
+    <small *ngIf="password?.errors?.minlength" id="passwordLengthErr" class="p-error">
+      {{ passwordLengthConsign }}
+    </small>
+    <small *ngIf="password?.errors?.pattern" id="passwordPatternErr" class="p-error">
+      {{ passwordConsign }}
+    </small>
+  </div>
+  <div class="p-field">
+    <label for="confirmPassword">Confirm Password</label>
+    <input id="confirmPassword" type="password" formControlName="confirmPassword" [feedback]="false" pPassword />
+    <small *ngIf="confirmPassword?.errors?.passwordNotEquivalent" id="confirmPasswordErr" class="p-error">
+      Passwords did not match.
+    </small>
+  </div>
+  <div class="p-field">
+    <small *ngIf="getAuthService().hasRegisterErr" id="registerErr" class="p-error">{{ getAuthService().registerErr }}</small>
+  </div>
+
+  <!-- Submit -->
+  <div class="p-field">
+    <button pButton pRipple type="button" [disabled]="!canSubmit()" label="Sign-up" class="p-button-raised t-b-blue" (click)="submit()"></button>
+  </div>
+
+  <div class="sign-up">
+    <small>Already registered? 
+      <a class="sign-up-button" role="button" (click)="displaySignIn()">Sign-in now</a></small>
+  </div>
+
+</app-form>
+
+

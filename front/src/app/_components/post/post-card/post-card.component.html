@@ -1,0 +1,21 @@
+<div class="post" >
+  <div class="post-navigation">
+    <button pButton pRipple 
+      *ngIf="isMyPost()"
+      type="button"
+      icon="pi pi-times"
+      class="p-button-rounded p-button-danger delete-button"
+      (click)="deletePost()"
+      pTooltip="Delete post">
+    </button>
+  </div>
+  <div *ngIf="post?.ImgUrl" class="header">
+    <img class="fit-picture" src="{{ post.ImgUrl }}" alt="Sorry! Image not available at this time">
+  </div>
+  <div class="content" [innerHTML]="post.Content | safeHtml"></div>
+  <div class="footer">
+    <div class="likes">likes : <b>{{ post.likes }}</b></div>
+    <i *ngIf="!post.didILikeIt" class="add-like" (click)="like()" pTooltip="Like the post" tooltipPosition="top"></i>
+    <i *ngIf="post.didILikeIt" class="remove-like" (click)="unlike()" pTooltip="Remove your like" tooltipPosition="top"></i>
+  </div>
+</div>

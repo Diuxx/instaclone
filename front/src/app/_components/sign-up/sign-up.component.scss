@@ -1,0 +1,24 @@
+@import '../../../assets/color-config.scss';
+
+:host ::ng-deep .form-content {
+    width: 325px;
+    max-width: 325px;
+}
+
+.sign-up {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    small {
+        width: fit-content;
+    }
+}
+
+.sign-up-button {
+    border-bottom: 1px $grey dotted;
+    cursor: pointer;
+}
+
+.sign-up-button:hover {
+    border-bottom: 1px $grey solid;
+}

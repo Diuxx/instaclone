@@ -1,0 +1,52 @@
+<app-form [formGroup]="formCheckout">
+  <div class="p-grid p-fluid">
+    <div class="p-field p-col-6">
+      <label for="img">Picture</label>
+      <p-fileUpload #postImgFileUpload
+        mode="basic"
+        chooseLabel="Browse file"
+        name="files[]"
+        customUpload="true"
+        accept="image/png, image/jpeg"
+        maxFileSize="500000"
+        (onSelect)="onFileChange($event)">
+      </p-fileUpload> 
+    </div>
+    <div *ngIf="formCheckout.controls.imgUrl?.value" class="p-field p-col-6 uploaded-zone">
+      <button pButton pRipple 
+        type="button"
+        icon="pi pi-times"
+        (click)="emptyUploadedFiles()"
+        class="p-button-rounded p-button-danger remove-uploaded-img"
+        pTooltip="Remove uploaded img">
+      </button>
+      <img class="fit-picture"
+        src="{{ formCheckout.controls.imgUrl?.value }}"
+        alt="uploaded picture">
+    </div>
+  </div>
+  <div class="p-field">
+    <label for="post">Post</label>
+    <p-editor formControlName="post" [style]="{'height':'150px'}">
+      <ng-template pTemplate="header">
+        <span class="ql-format-group">
+          <span title="Bold" class="ql-format-button ql-bold"></span>
+          <span class="ql-format-separator"></span>
+          <span title="Italic" class="ql-format-button ql-italic"></span>
+          <span class="ql-format-separator"></span>
+          <span title="Underline" class="ql-format-button ql-underline"></span>
+        </span>
+      </ng-template>
+  </p-editor>
+  </div>
+  <!-- Submit -->
+  <div class="p-field">
+    <button pButton pRipple 
+      type="button" 
+      (click)="submit()"
+      [disabled]="!canSubmit()"
+      label="Send"
+      class="p-button-raised t-b-blue">
+    </button>
+  </div>
+</app-form>
