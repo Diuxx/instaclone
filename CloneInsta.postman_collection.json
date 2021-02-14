@@ -1,0 +1,97 @@
+{
+	"variables": [],
+	"info": {
+		"name": "CloneInsta",
+		"_postman_id": "87ef0208-3459-7591-42e7-b392ad74b1c9",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get posts",
+			"request": {
+				"url": "http://localhost:3001/posts",
+				"method": "GET",
+				"header": [
+					{
+						"key": "userdata",
+						"value": "{ name: \"test\" }",
+						"description": "",
+						"disabled": true
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic dGVzdDp0ZXN0",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "create a post",
+			"request": {
+				"url": "http://localhost:3001/posts",
+				"method": "POST",
+				"header": [
+					{
+						"key": "userdata",
+						"value": "test",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Content\": \"test\",\n\t\"ImgUrl\": \"www.google.com\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "add new like",
+			"request": {
+				"url": "http://localhost:3001/likes",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"PostId\": \"hr4Kz1j4rFZOQFnSw0lnt\",\n\t\"FireBaseId\": \"test\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "delete like",
+			"request": {
+				"url": "http://localhost:3001/likes/0000",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "userdata",
+						"value": "test",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
