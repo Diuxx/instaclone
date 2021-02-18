@@ -2,7 +2,7 @@
 
 Clone insta est une application développée lors du module "Full stack" 2020-2021 durant ma dernière année de master. 
 
-Elle utilise les technologies angular et nodejs, pour le stockage des données nous utilisons sqlite.
+Elle a été développée avec les technologies angular et nodejs, pour le stockage des données nous utilisons sqlite.
 
 
 Elle met en pratique:
