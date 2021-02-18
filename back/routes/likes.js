@@ -6,7 +6,7 @@ var router = express.Router();
 const { nanoid } = require('nanoid');
 
 /* add like */
-router.post('/', async (req, res, next) => {
+router.post('/', (req, res, next) => {
     let query = 'INSERT INTO likes(Id, PostId, FireBaseId) VALUES(?, ?, ?)';
     const auth = req.currentUser;
 
@@ -31,7 +31,7 @@ router.post('/', async (req, res, next) => {
 });
 
 /* delete like */
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', (req, res, next) => {
     let query = "DELETE FROM likes WHERE Id LIKE '" + req.params.id + "'";
     const auth = req.currentUser;
 

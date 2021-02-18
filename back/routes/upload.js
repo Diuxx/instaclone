@@ -3,7 +3,7 @@ var router = express.Router();
 var fs = require('fs');
 var formidable = require('formidable');
 
-router.post('/', async (req, res, next) => {
+router.post('/', (req, res, next) => {
     var form = new formidable.IncomingForm();
     form.parse(req, (err, fields, files) => {
         if(files != null) {

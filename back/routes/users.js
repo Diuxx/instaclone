@@ -5,7 +5,7 @@ var router = express.Router();
 const { nanoid } = require('nanoid');
 
 /* get a user by id */
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', (req, res, next) => {
   let user = req.headers.userdata ? JSON.parse(req.headers.userdata) : null;
   let query = "SELECT UserName as displayName FROM users WHERE FireBaseId = ?";
 
@@ -27,7 +27,7 @@ router.get('/:id', async (req, res, next) => {
 });
 
 /* create user */
-router.post('/', async (req, res, next) => {
+router.post('/', (req, res, next) => {
   let user = req.headers.userdata ? JSON.parse(req.headers.userdata) : null;
   let query = 'INSERT INTO users(Id, FireBaseId, UserName) VALUES(?, ?, ?)';
   console.log(query);
