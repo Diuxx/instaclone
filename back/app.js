@@ -7,6 +7,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var db = require('./database/connexion');
+const decodeIDToken = require('./authenticateToken');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var postsRouter = require('./routes/posts');
@@ -25,6 +26,7 @@ const io = require('socket.io')(http, {
 });
 
 app.use(cors());
+app.use(decodeIDToken);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

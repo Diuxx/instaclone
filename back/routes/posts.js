@@ -6,8 +6,9 @@ var router = express.Router();
 const { nanoid } = require('nanoid')
 
 /* Get posts */
-router.get('/', function(req, res, next) {
+router.get('/', async function(req, res, next) {
     let user = req.headers.userdata ? JSON.parse(req.headers.userdata) : null;
+    const auth = req.currentUser;
     /* 
      * Récupère la liste des posts, compte le nombre de likes et retourne l'id du like selon l'utilisateur qui requete
      * il est donc possible de supprimer un like distinct (unlike) avec l'id du like
@@ -23,7 +24,7 @@ router.get('/', function(req, res, next) {
                 'ORDER BY CreatedAt';
     // console.log(query);
 
-    if (user) {
+    if (auth) {
         db.all(query, [], (err, rows) => {
             if (err) {
                 console.log(err.message);
@@ -39,11 +40,10 @@ router.get('/', function(req, res, next) {
 
 /* Delete post */
 router.delete('/:id', function(req, res, next) {
-    let user = req.headers.userdata ? JSON.parse(req.headers.userdata) : null;
     let query = "DELETE FROM posts WHERE Id LIKE '" + req.params.id + "'";
-    console.log(query);
+    const auth = req.currentUser;
 
-    if (user) {
+    if (auth) {
         db.run(query, [], (err) => {
             if (err) {
                 res.status(500).json({ message: err.message });
@@ -61,9 +61,9 @@ router.delete('/:id', function(req, res, next) {
 router.post('/', function(req, res, next) {
     let user = req.headers.userdata ? JSON.parse(req.headers.userdata) : null;
     let query = 'INSERT INTO posts(Id, Content, ImgUrl, CreatedAt, UpdatedAt, CreatedBy) VALUES(?, ?, ?, ?, ?, ?)';
-    //console.log(user);
+    const auth = req.currentUser;
 
-    if (user) {
+    if (auth) {
         let createdAt = Date.now();
         let post = {
             Id: nanoid(),

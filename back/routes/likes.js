@@ -7,11 +7,10 @@ const { nanoid } = require('nanoid');
 
 /* add like */
 router.post('/', (req, res, next) => {
-    let user = req.headers.userdata ? JSON.parse(req.headers.userdata) : null;
     let query = 'INSERT INTO likes(Id, PostId, FireBaseId) VALUES(?, ?, ?)';
-    console.log(req.body);
+    const auth = req.currentUser;
 
-    if (user) {
+    if (auth) {
         let like = {
             Id: nanoid(),
             PostId: req.body.PostId,
@@ -33,11 +32,10 @@ router.post('/', (req, res, next) => {
 
 /* delete like */
 router.delete('/:id', (req, res, next) => {
-    let user = req.headers.userdata ? JSON.parse(req.headers.userdata) : null;
     let query = "DELETE FROM likes WHERE Id LIKE '" + req.params.id + "'";
-    console.log(query);
+    const auth = req.currentUser;
 
-    if (user) {
+    if (auth) {
         db.run(query, [], (err) => {
             if (err) {
                 res.status(500).json({ message: err.message });
