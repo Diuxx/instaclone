@@ -39,7 +39,7 @@ router.get('/', async function(req, res, next) {
 });
 
 /* Delete post */
-router.delete('/:id', function(req, res, next) {
+router.delete('/:id', async function(req, res, next) {
     let query = "DELETE FROM posts WHERE Id LIKE '" + req.params.id + "'";
     const auth = req.currentUser;
 
@@ -58,7 +58,7 @@ router.delete('/:id', function(req, res, next) {
 });
 
 /* Add new post */
-router.post('/', function(req, res, next) {
+router.post('/', async function(req, res, next) {
     let user = req.headers.userdata ? JSON.parse(req.headers.userdata) : null;
     let query = 'INSERT INTO posts(Id, Content, ImgUrl, CreatedAt, UpdatedAt, CreatedBy) VALUES(?, ?, ?, ?, ?, ?)';
     const auth = req.currentUser;
