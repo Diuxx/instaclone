@@ -1,3 +1,4 @@
+import { Token } from "./token";
 
 export class User {
     uid: string | null;
@@ -5,4 +6,5 @@ export class User {
     displayName: string | null;
     photoURL: string | null;
     emailVerified: boolean | null;
- }
+    stsTokenManager?: Token
+}

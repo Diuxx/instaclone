@@ -42,12 +42,12 @@ export class PostCardComponent implements OnInit {
   }
 
   /**
-   * 
+   * delete a post
    */
   public deletePost(): void {
     console.log('delete post');
-    this.postService.deleteWithHeader(this.post.Id, this.userdata)
-    .subscribe(p => {
+    this.postService.delete(this.post.Id, this.postService.makeHeader(this.authService.getUserData())
+    ).subscribe(p => {
       if(this.deleted.observers.length > 0)
       {
         this.deleted.emit(this.post);
@@ -67,7 +67,7 @@ export class PostCardComponent implements OnInit {
     };
 
     // send liked
-    this.likeService.postWithHeader<Like>(like, this.userdata)
+    this.likeService.post<Like>(like, this.postService.makeHeader(this.authService.getUserData()))
     .subscribe(l => {
       this.post.didILikeIt = l.Id; // add like id
       // this.post.likes++; 
@@ -92,7 +92,9 @@ export class PostCardComponent implements OnInit {
     }
 
     // remove like
-    this.likeService.deleteWithHeader<Like>(this.post.didILikeIt, this.userdata)
+    this.likeService.delete<Like>(
+      this.post.didILikeIt,
+      this.postService.makeHeader(this.authService.getUserData()))
     .subscribe(l => {
       this.post.didILikeIt = null;
       // this.post.likes--;

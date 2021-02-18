@@ -44,27 +44,18 @@ export class PostDialogComponent extends FormComponent implements OnInit {
    * overrided send data
    */
   protected sendData(): void {
-    console.log('postDialog sending data...');
-    
     let post: Post = new Post();
     post.Content = this.formCheckout.controls.post.value;
     post.ImgUrl = this.formCheckout.controls.imgUrl.value;
 
-    this.postService.postWithHeader<Post>(
-      post, 
-      { 'userData': JSON.stringify(this.authService.getUserData()) })
-      .subscribe(p => {
-        // clear data..
-        this.clearData();
-        p.UserDisplayName = this.authService.getUserData().displayName;
-        if (this.postHasBeenUploaded.observers.length > 0) {
-          console.log(p);
-          this.postHasBeenUploaded.emit(p);
-        }
-      }, err => {
-        console.log(err);
+    this.postService.post<Post>(post, this.postService.makeHeader(this.authService.getUserData())).subscribe(p => {
+      this.clearData(); // clear data
+      p.UserDisplayName = this.authService.getUserData().displayName;
+      if (this.postHasBeenUploaded.observers.length > 0) {
+        console.log(p);
+        this.postHasBeenUploaded.emit(p);
       }
-    );
+    }, err => console.log(err));
   }
 
   /**

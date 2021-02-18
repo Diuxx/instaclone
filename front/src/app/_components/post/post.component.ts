@@ -84,22 +84,17 @@ export class PostComponent implements OnInit {
    * query posts to api
    */
   private queryPosts(): void {
-    // reload data
-    this.postService.getAllWithHeader<Post>(
-      { 'userData': JSON.stringify(this.authService.getUserData()) }
-      ).subscribe(posts => {
-        this.posts = posts.sort((a, b) => new Date(a.UpdatedAt).getTime() - new Date(b.UpdatedAt).getTime());;
-        this.posts.reverse();
+    this.postService.getAll<Post>(
+      this.postService.makeHeader(this.authService.getUserData())
+    ).subscribe(p => {
+      this.posts = p.sort((a, b) => new Date(a.UpdatedAt).getTime() - new Date(b.UpdatedAt).getTime());;
+      this.posts.reverse();
 
-        this.posts.map(p => p.Content = this.addUserNameToPostContent(p.Content, p.UserDisplayName));
-
-        console.log('posts', posts);
-        this.cd.markForCheck();
-      },
-      err => {
-        console.log('get all posts error.', err);
-      }
-    );
+      this.posts.map(p => p.Content = this.addUserNameToPostContent(p.Content, p.UserDisplayName));
+      this.cd.markForCheck();
+    }, err => {
+      console.log('get all posts error.', err);
+    });
   }
 
   /**

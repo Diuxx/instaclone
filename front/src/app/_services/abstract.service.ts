@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { User } from '../shared/intefaces/User';
 
 export abstract class AbstractService {
 
@@ -19,6 +20,18 @@ export abstract class AbstractService {
     constructor(http: HttpClient, uri?: string) {
         this.http = http;
         this.uri = uri;
+    }
+
+    /**
+     * Generate http header with bearer token
+     */
+    public makeHeader(user: User): HttpHeaders {
+        let accessToken: string = user.stsTokenManager?.accessToken;
+        return new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${accessToken}`,
+            'userData': JSON.stringify(user) 
+        });
     }
 
     /**
@@ -44,8 +57,8 @@ export abstract class AbstractService {
     /**
      * getAll api function
      */
-    public getAll<T>(): Observable<T[]> {
-        return this.http.get<T[]>(`${environment.api}/${this.uri}`);
+    public getAll<T>(headers?: HttpHeaders): Observable<T[]> {
+        return this.http.get<T[]>(`${environment.api}/${this.uri}`, { headers: headers });
     }
 
     /**
@@ -64,8 +77,8 @@ export abstract class AbstractService {
      * Post a data to api
      * @param data data to send
      */
-    public post<T>(data: T): Observable<T> {
-        return this.http.post<T>(`${environment.api}/${this.uri}`, data);
+    public post<T>(data: T, headers?: HttpHeaders): Observable<T> {
+        return this.http.post<T>(`${environment.api}/${this.uri}`, data, { headers: headers });
     }
 
     /**
@@ -86,8 +99,8 @@ export abstract class AbstractService {
      * Delete a data from uri with id
      * @param id id of element to delete
      */
-    public delete<T>(id: string): Observable<T> {
-        return this.http.delete<T>(`${environment.api}/${this.uri}/${id}`);
+    public delete<T>(id: string, headers?: HttpHeaders): Observable<T> {
+        return this.http.delete<T>(`${environment.api}/${this.uri}/${id}`, { headers: headers });
     }
 
     /**
