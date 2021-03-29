@@ -31,4 +31,4 @@ l'url du front : http://localhost:4200
 
 l'url du back permettant d'accéder aux endpoints : http://localhost:3001
 
-l'url de socketio afin de diffuser des messages au personne connectées : http://localhost:3000
+l'url de socketio afin de diffuser des messages aux personnes connectées : http://localhost:3000
